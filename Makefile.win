@@ -1,0 +1,37 @@
+# Project: arhive
+# Makefile created by Dev-C++ 5.6.3
+
+CPP      = g++.exe
+CC       = gcc.exe
+WINDRES  = windres.exe
+OBJ      = main.o tree.o dictionary.o node.o
+LINKOBJ  = main.o tree.o dictionary.o node.o
+LIBS     = -L"D:/mingw32_5.3/mingw32/lib" -static-libgcc
+INCS     = -I"D:/mingw32_5.3/mingw32/include"
+CXXINCS  = -I"D:/mingw32_5.3/mingw32/include"
+BIN      = arhive.exe
+CXXFLAGS = $(CXXINCS) -std=c++11 -std=c++14
+CFLAGS   = $(INCS) -std=c++11 -std=c++14
+RM       = rm.exe -f
+
+.PHONY: all all-before all-after clean clean-custom
+
+all: all-before $(BIN) all-after
+
+clean: clean-custom
+	${RM} $(OBJ) $(BIN)
+
+$(BIN): $(OBJ)
+	$(CPP) $(LINKOBJ) -o $(BIN) $(LIBS)
+
+main.o: main.cpp
+	$(CPP) -c main.cpp -o main.o $(CXXFLAGS)
+
+tree.o: tree.cpp
+	$(CPP) -c tree.cpp -o tree.o $(CXXFLAGS)
+
+dictionary.o: dictionary.cpp
+	$(CPP) -c dictionary.cpp -o dictionary.o $(CXXFLAGS)
+
+node.o: node.cpp
+	$(CPP) -c node.cpp -o node.o $(CXXFLAGS)
