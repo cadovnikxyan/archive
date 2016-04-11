@@ -94,10 +94,10 @@ map<char,vector<bool> >& tree::getCode(){
 }
 
 
-void tree::writeTree()const{
+void tree::writeTree(){
 	ofstream t("output.tree",ios::out);
-		map<char, vector<bool> >::iterator it= this->tcode.begin();
-			while(it!=this->tcode.end()){
+		map<char, vector<bool> >::iterator it= tcode.begin();
+			while(it!=tcode.end()){
 				t<<it->first;
 					string str;
 					vector<bool> b=it->second;
@@ -112,9 +112,9 @@ void tree::writeTree()const{
 						++it;
 			}
 }
-void tree::writeTree(ofstream& stream)const{
-		map<char, vector<bool> >::iterator it= this->tcode.begin();
-			while(it!=this->tcode.end()){
+void tree::writeTree(ofstream& stream){
+		map<char, vector<bool> >::iterator it= tcode.begin();
+			while(it!=tcode.end()){
 				stream<<it->first;
 					string str;
 					vector<bool> b=it->second;

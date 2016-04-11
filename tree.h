@@ -29,10 +29,10 @@ class tree
 				
 	void 					 printTree();
 	map<char,vector<bool> >& getCode();
+	void 					 writeTree();
+	void 					 writeTree(ofstream& stream);
 	
 	node* 					 getRoot() const;
-	void 					 writeTree()const;
-	void 					 writeTree(ofstream& stream)const;
 	
 };
 
