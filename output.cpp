@@ -44,7 +44,24 @@ void createDic(map<char,int>& dic,map<char,int>::iterator& itm, string* str){
 		itm=dic.begin();		
 }
 	
-		
+void writeTree(map<char, vector<bool> >& tcode){
+	ofstream t("output.tree",ios::out );
+		map<char, vector<bool> >::iterator it= tcode.begin();
+			while(it!=tcode.end()){
+				t<<it->first;
+					string str;
+					vector<bool> b=it->second;
+						for(int i=0;i<b.size();++i){
+							if(b[i]){
+								str+="1";
+							}else{
+								str+="0";
+							}
+						}
+						t<<str<<endl;
+						++it;
+			}
+}		
 
 int main (int argc, char** argv) {
 
@@ -57,12 +74,14 @@ int main (int argc, char** argv) {
 	createDic(dic,it,str);
 	tree* t= new tree(dic);
 
-
+	const char outa[] ="output.a";
+	const char out[] ="output.exe";
+	
 	cout<<"--------------------------------"<<endl;
 
-
+	writeTree(t->getCode());
 	
-	ofstream g("output.a", ios::out | ios::binary);
+	ofstream g(outa, ios::out | ios::binary);
 	
 	int strIt=0;
 	int count=0; char buf=0;
@@ -80,8 +99,8 @@ int main (int argc, char** argv) {
 	
 
 	
-	ifstream F("output.a", ios::in | ios::binary);
-	ofstream go("output.cpp", ios::out | ios::binary);
+	ifstream F(outa, ios::in | ios::binary);
+	ofstream go(out, ios::out | ios::binary);
 	
 	node *p = t->getRoot();
 	count=0; char byte; 
@@ -100,4 +119,3 @@ int main (int argc, char** argv) {
 	delete t;
 	
 	return 0;
-}

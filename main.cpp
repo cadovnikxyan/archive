@@ -26,11 +26,9 @@ char* CStyleFileRead(const char* filepath, int* _fsize ){
 
 string* CppStyleFileRead(const char* filepath){
 	
-	static std::string* str=new std::string(
-	(std::istreambuf_iterator<char>
-	(*(std::auto_ptr<std::ifstream>(new std::ifstream(filepath)))
-	.get())),
-    std::istreambuf_iterator<char>());
+	static string* str=new string(
+	(istreambuf_iterator<char>
+	(*(auto_ptr<ifstream>(new ifstream(filepath,ios::binary))).get())),istreambuf_iterator<char>());
 	return str;		
 }
 
@@ -44,7 +42,24 @@ void createDic(map<char,int>& dic,map<char,int>::iterator& itm, string* str){
 		itm=dic.begin();		
 }
 	
-		
+void writeTree(map<char, vector<bool> >& tcode){
+	ofstream t("output.tree",ios::out );
+		map<char, vector<bool> >::iterator it= tcode.begin();
+			while(it!=tcode.end()){
+				t<<it->first;
+					string str;
+					vector<bool> b=it->second;
+						for(int i=0;i<b.size();++i){
+							if(b[i]){
+								str+="1";
+							}else{
+								str+="0";
+							}
+						}
+						t<<str<<endl;
+						++it;
+			}
+}		
 
 int main (int argc, char** argv) {
 
@@ -53,16 +68,18 @@ int main (int argc, char** argv) {
 	map<char,int> dic;
 	map<char,int>::iterator it=dic.begin();
 
-	string* str= CppStyleFileRead("main.cpp");	
+	string* str= CppStyleFileRead("passGenerator.exe");	
 	createDic(dic,it,str);
 	tree* t= new tree(dic);
 
-
+	const char outa[] ="output.a";
+	const char out[] ="output.exe";
+	cout<<str->size()<<endl;
 	cout<<"--------------------------------"<<endl;
 
-
+	writeTree(t->getCode());
 	
-	ofstream g("output.a", ios::out | ios::binary);
+	ofstream g(outa, ios::out | ios::binary);
 	
 	int strIt=0;
 	int count=0; char buf=0;
@@ -80,8 +97,8 @@ int main (int argc, char** argv) {
 	
 
 	
-	ifstream F("output.a", ios::in | ios::binary);
-	ofstream go("output.cpp", ios::out | ios::binary);
+	ifstream F(outa, ios::in | ios::binary);
+	ofstream go(out, ios::out | ios::binary);
 	
 	node *p = t->getRoot();
 	count=0; char byte; 
@@ -89,7 +106,7 @@ int main (int argc, char** argv) {
 	while(!F.eof())
 	{   bool b = byte & (1 << (7-count) );
 		if (b) p=p->getRnextNode(); else p=p->getLnextNode();
-		if (p->getRnextNode()==nullptr && p->getLnextNode()==nullptr) {go<<p->getChar();cout<<p->getChar(); p=t->getRoot();}  
+		if (p->getRnextNode()==nullptr && p->getLnextNode()==nullptr) {go<<p->getChar(); p=t->getRoot();}  
 		count++;
 		if (count==8) {count=0;byte = F.get();}
 	}
@@ -101,3 +118,5 @@ int main (int argc, char** argv) {
 	
 	return 0;
 }
+
+

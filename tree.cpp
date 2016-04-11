@@ -61,7 +61,6 @@ node* tree::getRoot()const{
 }
 
 
-
 void tree::buildCodeTable(node* _root){
 	
 	if(_root->getLnextNode()!=nullptr){
@@ -81,5 +80,5 @@ void tree::buildCodeTable(node* _root){
 
 map<char,vector<bool> >& tree::getCode(){
 
-	return tcode;
+	return this->tcode;
 }
