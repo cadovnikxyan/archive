@@ -3,19 +3,26 @@
 #include <string>
 #include <vector>
 #include "word.h"
+#include <iostream>
 
 using namespace std;
+
+
+
+
 
 class node
 {
 	bool indexNode;	
 	node* lnext;
 	node* rnext;
-	vector<char> symbol;
+	char symbol;
 	int weight;
+	static int count;
 	
 	public:		
-		node(word* w);
+		node(node* l,node* r);
+		node(char s, int _weight);
 		node();
 		~node();		
 		
@@ -24,13 +31,14 @@ class node
 		node* getRnextNode() const;
 		bool getIndexNode() const;
 		int getWeight()const;
+		char getChar()const;
 		
 		void setLNext(node* n);
 		void setRNext(node* n);
 		void writeBit(bool b);
 		void setChar(char* s);
-		
 		node operator+(const node& n);
+
 
 };
 

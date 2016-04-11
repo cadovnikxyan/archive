@@ -1,12 +1,20 @@
 #include "node.h"
 
-node::node(word* w):lnext(0),rnext(0){
-	symbol.push_back(w->wsymbol);
-	weight=w->wcount;
-}
-node::node(){
+
+
+node::node(node* l, node* r):lnext(l),rnext(r){
+	this->weight=l->getWeight()+r->getWeight();
+	this->symbol=0;
 }
 
+node::node(char s, int _weight):lnext(nullptr),rnext(nullptr){
+	this->symbol=s;
+	this->weight=_weight;
+}
+node::node(){
+	
+}
+int node::count=0;
 
 node::~node(){
 	
@@ -33,34 +41,32 @@ void node::writeBit(bool b){
 }
 
 bool node::getIndexNode()const{
+
 	return this->indexNode;
 }
 string node::toString()const{
 		
 		string str;
-		for(int i=0;i<symbol.size();++i){
-			str+=symbol[i];
-		}
-		return str;
+		return str+=symbol;
 }
 
 void node::setChar(char* s){
-	this->symbol.push_back(*s);
+	this->symbol=(*s);
 }
 
 node node::operator+(const node& n){
 	
 	node m;
-	vector<char> buf=this->symbol;
 	m.weight=this->weight+n.weight;
-	for(int i=0;i<n.symbol.size();++i){
-		buf.push_back(n.symbol[i]);
-	}
-	m.symbol=buf;
+		
 	return m;
 	
 }
 
 int node::getWeight()const{
 	return this->weight;
+}
+
+char node::getChar()const{
+	return this->symbol;
 }
