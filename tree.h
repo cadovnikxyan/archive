@@ -3,6 +3,7 @@
 #include <map>
 #include <list>
 #include "node.h"
+#include <fstream>
 
 using namespace std;
 
@@ -10,23 +11,28 @@ using namespace std;
 class tree
 {
 	
-	list<node*> _tree;
+	list<node*> 			 _tree;
 	node* root;
+	map<char,int> 			 dic;
 	map<char, vector<bool> > tcode;
-	vector<bool> code;
+	vector<bool> 			 code;
 	
-		
-	void createTree(list<node*>& __tree );
-	void buildCodeTable(node* _root);	
+	void 					 createDic(string* str);	
+	void 					 createTree(list<node*>& __tree );
+	void 					 buildCodeTable(node* _root);	
 	
 	public:
-		tree(map<char,int>& _dic);
-		~tree();
-				
-		void printTree();
-		node* getRoot() const;
-		map<char,vector<bool> >& getCode();
 		
+		tree(map<char,int>& _dic);
+		tree(string* str);
+	   ~tree();
+				
+	void 					 printTree();
+	map<char,vector<bool> >& getCode();
+	
+	node* 					 getRoot() const;
+	void 					 writeTree()const;
+	void 					 writeTree(ofstream& stream)const;
 	
 };
 

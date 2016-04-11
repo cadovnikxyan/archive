@@ -10,7 +10,17 @@ tree::tree(map<char,int>& _dic){
 		createTree(_tree);
 }
 
-
+tree::tree(string* str){
+	
+	string::iterator its=str->begin();		
+		for(;its!=str->end();++its){					
+				dic[*its]++;				
+		}	
+	for(map<char,int>::iterator it= dic.begin();it!= dic.end();++it){
+		_tree.push_back(new node(it->first,it->second));
+	}
+	createTree(_tree);
+}
 
 tree::~tree(){
 	delete root;
@@ -82,3 +92,51 @@ map<char,vector<bool> >& tree::getCode(){
 
 	return this->tcode;
 }
+
+
+void tree::writeTree()const{
+	ofstream t("output.tree",ios::out);
+		map<char, vector<bool> >::iterator it= this->tcode.begin();
+			while(it!=this->tcode.end()){
+				t<<it->first;
+					string str;
+					vector<bool> b=it->second;
+						for(int i=0;i<b.size();++i){
+							if(b[i]){
+								str+="1";
+							}else{
+								str+="0";
+							}
+						}
+						t<<str<<endl;
+						++it;
+			}
+}
+void tree::writeTree(ofstream& stream)const{
+		map<char, vector<bool> >::iterator it= this->tcode.begin();
+			while(it!=this->tcode.end()){
+				stream<<it->first;
+					string str;
+					vector<bool> b=it->second;
+						for(int i=0;i<b.size();++i){
+							if(b[i]){
+								str+="1";
+							}else{
+								str+="0";
+							}
+						}
+						stream<<str<<endl;
+						++it;
+			}
+}
+
+void tree::createDic(string* str){
+						
+	string::iterator it=str->begin();		
+		for(;it!=str->end();++it){					
+				dic[*it]++;				
+		}
+				
+}
+
+

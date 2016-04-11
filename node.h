@@ -15,23 +15,23 @@ class node
 		
 	node* lnext;
 	node* rnext;
-	char symbol;
-	int weight;
+	char  symbol;
+	int   weight;
 	
 	public:		
 		node(node* l,node* r);
 		node(char s, int _weight);
 		node();
-		~node();		
+	   ~node();		
 		
 		node* getLnextNode() const;
 		node* getRnextNode() const;
-		int getWeight()const;
-		char getChar()const;
+		int   getWeight()const;
+		char  getChar()const;
 		
-		void setLNext(node* n);
-		void setRNext(node* n);
-		void setChar(char* s);
+		void  setLNext(node* n);
+		void  setRNext(node* n);
+		void  setChar(char* s);
 
 
 };

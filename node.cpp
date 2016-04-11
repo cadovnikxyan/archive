@@ -9,8 +9,9 @@ node::node(char s, int _weight):lnext(nullptr),rnext(nullptr){
 	this->symbol=s;
 	this->weight=_weight;
 }
-node::node(){
-	
+node::node():lnext(nullptr),rnext(nullptr){
+	this->symbol=0;
+	this->weight=0;
 }
 
 node::~node(){
