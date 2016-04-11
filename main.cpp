@@ -137,10 +137,6 @@ int main (int argc, char* argv[]) {
 		help();
 	}	
 
-
-//	delete str;
-//	delete t;
-	
 	return 0;
 }
 
