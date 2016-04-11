@@ -4,9 +4,7 @@
 #include <memory>
 #include <vector>
 #include <map>
-#include "stdlib.h"
 #include <algorithm>
-#include "dictionary.h"
 #include "tree.h"
 
 using namespace std;
@@ -45,21 +43,8 @@ void createDic(map<char,int>& dic,map<char,int>::iterator& itm, string* str){
 		}
 		itm=dic.begin();		
 }
-
-void p(node* n,bool flag){
-	if(flag){
-		cout<<"\troot: "<<n->getWeight()<<endl;
-	}
 	
-		if(n->getRnextNode()!=nullptr){
-			cout<<"\t\tright: "<<n->getRnextNode()->getWeight()<<endl;			
-			p(n->getRnextNode(),false);					
-	}
-		cout<<n->getChar()<<endl;	
-		return;	
 		
-	
-	
 }
 
 int main (int argc, char** argv) {
@@ -70,20 +55,17 @@ int main (int argc, char** argv) {
 	map<char,int>::iterator it=dic.begin();
 
 	string* str= CppStyleFileRead("main.cpp");	
-//	passGenerator.exe
-	string* fstr=CppStyleFileRead("main.cpp");	
-	int s=0;
-	string* str1= new string(CStyleFileRead("main.cpp",&s));
-	int strIt=0;
-
 	createDic(dic,it,str);
 	tree* t= new tree(dic);
 
 
 	cout<<"--------------------------------"<<endl;
+
+
 	
 	ofstream g("output.a", ios::out | ios::binary);
 	
+	int strIt=0;
 	int count=0; char buf=0;
     while (strIt!=str->size())
     { char c = str->c_str()[strIt];
@@ -97,6 +79,7 @@ int main (int argc, char** argv) {
     }
 	g.close();
 	
+
 	
 	ifstream F("output.a", ios::in | ios::binary);
 	ofstream go("output.cpp", ios::out | ios::binary);
@@ -104,7 +87,6 @@ int main (int argc, char** argv) {
 	node *p = t->getRoot();
 	count=0; char byte; 
 	byte = F.get();
-	int cc=0;
 	while(!F.eof())
 	{   bool b = byte & (1 << (7-count) );
 		if (b) p=p->getRnextNode(); else p=p->getLnextNode();
@@ -112,12 +94,10 @@ int main (int argc, char** argv) {
 		count++;
 		if (count==8) {count=0;byte = F.get();}
 	}
-
-
 	F.close();	
 	go.close();
 	
-	delete fstr,str,str1;
+	delete str;
 	delete t;
 	
 	return 0;

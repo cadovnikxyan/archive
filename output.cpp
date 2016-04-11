@@ -70,12 +70,6 @@ int main (int argc, char** argv) {
 	map<char,int>::iterator it=dic.begin();
 
 	string* str= CppStyleFileRead("main.cpp");	
-//	passGenerator.exe
-	string* fstr=CppStyleFileRead("main.cpp");	
-	int s=0;
-	string* str1= new string(CStyleFileRead("main.cpp",&s));
-	int strIt=0;
-
 	createDic(dic,it,str);
 	tree* t= new tree(dic);
 
@@ -84,6 +78,7 @@ int main (int argc, char** argv) {
 	
 	ofstream g("output.a", ios::out | ios::binary);
 	
+	int strIt=0;
 	int count=0; char buf=0;
     while (strIt!=str->size())
     { char c = str->c_str()[strIt];
@@ -104,7 +99,6 @@ int main (int argc, char** argv) {
 	node *p = t->getRoot();
 	count=0; char byte; 
 	byte = F.get();
-	int cc=0;
 	while(!F.eof())
 	{   bool b = byte & (1 << (7-count) );
 		if (b) p=p->getRnextNode(); else p=p->getLnextNode();
@@ -112,12 +106,10 @@ int main (int argc, char** argv) {
 		count++;
 		if (count==8) {count=0;byte = F.get();}
 	}
-
-
 	F.close();	
 	go.close();
 	
-	delete fstr,str,str1;
+	delete str;
 	delete t;
 	
 	return 0;
