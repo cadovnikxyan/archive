@@ -2,7 +2,6 @@
 #define NODE_H
 #include <string>
 #include <vector>
-#include "word.h"
 #include <iostream>
 
 using namespace std;

@@ -4,8 +4,8 @@
 CPP      = g++.exe -D__DEBUG__
 CC       = gcc.exe -D__DEBUG__
 WINDRES  = windres.exe
-OBJ      = main.o tree.o dictionary.o node.o qwe.o
-LINKOBJ  = main.o tree.o dictionary.o node.o qwe.o
+OBJ      = main.o tree.o node.o
+LINKOBJ  = main.o tree.o node.o
 LIBS     = -L"D:/mingw32_5.3/mingw32/lib" -static-libgcc -g3
 INCS     = -I"D:/mingw32_5.3/mingw32/include"
 CXXINCS  = -I"D:/mingw32_5.3/mingw32/include"
@@ -30,11 +30,5 @@ main.o: main.cpp
 tree.o: tree.cpp
 	$(CPP) -c tree.cpp -o tree.o $(CXXFLAGS)
 
-dictionary.o: dictionary.cpp
-	$(CPP) -c dictionary.cpp -o dictionary.o $(CXXFLAGS)
-
 node.o: node.cpp
 	$(CPP) -c node.cpp -o node.o $(CXXFLAGS)
-
-qwe.o: qwe.cpp
-	$(CPP) -c qwe.cpp -o qwe.o $(CXXFLAGS)

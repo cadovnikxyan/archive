@@ -45,7 +45,6 @@ void createDic(map<char,int>& dic,map<char,int>::iterator& itm, string* str){
 }
 	
 		
-}
 
 int main (int argc, char** argv) {
 

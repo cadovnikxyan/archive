@@ -3,7 +3,6 @@
 #include <map>
 #include <list>
 #include "node.h"
-#include "dictionary.h"
 
 using namespace std;
 

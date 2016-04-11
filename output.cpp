@@ -4,9 +4,7 @@
 #include <memory>
 #include <vector>
 #include <map>
-#include "stdlib.h"
 #include <algorithm>
-#include "dictionary.h"
 #include "tree.h"
 
 using namespace std;
@@ -45,22 +43,8 @@ void createDic(map<char,int>& dic,map<char,int>::iterator& itm, string* str){
 		}
 		itm=dic.begin();		
 }
-
-void p(node* n,bool flag){
-	if(flag){
-		cout<<"\troot: "<<n->getWeight()<<endl;
-	}
 	
-		if(n->getRnextNode()!=nullptr){
-			cout<<"\t\tright: "<<n->getRnextNode()->getWeight()<<endl;			
-			p(n->getRnextNode(),false);					
-	}
-		cout<<n->getChar()<<endl;	
-		return;	
 		
-	
-	
-}
 
 int main (int argc, char** argv) {
 
@@ -75,6 +59,8 @@ int main (int argc, char** argv) {
 
 
 	cout<<"--------------------------------"<<endl;
+
+
 	
 	ofstream g("output.a", ios::out | ios::binary);
 	
@@ -92,6 +78,7 @@ int main (int argc, char** argv) {
     }
 	g.close();
 	
+
 	
 	ifstream F("output.a", ios::in | ios::binary);
 	ofstream go("output.cpp", ios::out | ios::binary);
